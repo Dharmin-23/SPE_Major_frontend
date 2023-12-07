@@ -1,0 +1,48 @@
+version: '3'
+services:
+  mysql-swapsie-service:
+    image: mysql
+    container_name: mysql-swapsie-service
+    restart: always
+    networks:
+      - swapsie-network
+    environment:
+      MYSQL_DATABASE: "swapsieDevops"
+      MYSQL_ROOT_PASSWORD: "Password"
+    ports:
+      - "3307:3306"
+    volumes:
+      - swapsie-dp:/var/lib/mysql
+
+  swapsie-backend-container:
+    image: "shubhamp194/swapsie-backend-image"
+    container_name: swapsie-backend-container
+    restart: always
+    networks:
+      - swapsie-network
+    # environment:
+    #   MYSQL_URL: jdbc:mysql://mysql-swapsie-service:3306/swapsieDevops?useSSL=false&useUnicode=yes&characterEncoding=UTF-8&allowPublicKeyRetrieval=true&serverTimezone=UTC
+    #   MYSQL_NAME: root
+    #   MYSQL_PASSWORD: Password
+    ports:
+      - "8081:8081"
+    depends_on:
+      - mysql-swapsie-service
+
+  swapsie-frontend-container:
+    image: "shubhamp194/swapsie-frontend-image"
+    container_name: swapsie-frontend-container
+    restart: always
+    networks:
+      - swapsie-network
+    ports:
+      - "3000:3000"
+    depends_on:
+      - swapsie-backend-container
+    
+networks:
+  swapsie-network:
+    driver: bridge
+
+volumes:
+  swapsie-dp:

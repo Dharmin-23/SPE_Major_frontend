@@ -1,0 +1,162 @@
+body {
+    background: linear-gradient(to right, rgb(202, 185, 221), rgb(145, 177, 214));
+}
+
+.navbar{
+    background-color: black;
+    padding: 5px;
+    display: flex;
+    justify-content:left;
+}
+
+.LoginPage, .RegistrationPage, .Add-product-page{
+    text-align: center;
+    display: flex;
+    min-height: 90vh;
+    align-items: center;
+    justify-content: center;
+}
+
+.form-box, .login-form, .registration-form, .add-product-form{
+    display: flex;
+    flex-direction: column;
+}
+
+.form-box{
+    border: 2px white solid;
+    padding: 4rem;
+    border-radius: 10px;
+}
+
+.product-img{
+    height: 200px;
+    width: 215px;
+}
+
+.All-products-page, .My-products-page{
+    min-height: 91vh;    
+    /* background: linear-gradient(to right, green, yellow); */
+    background: linear-gradient(to right, #e79530, #da5530);
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+.swap-request-page{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-content: center;
+    justify-content: center;
+}
+
+.swap-request-card{
+    display: flex;
+    text-align: center;
+    border: 2px solid black;
+    align-items: center;
+    border-radius: 30px;
+    height: 350px;
+    justify-content: center;
+    margin: 20px;
+    background-color: rgb(115, 233, 151);
+}
+
+.swap-request-element{
+    text-align: center;
+    /* border: 2px solid yellow; */
+    width: 260px;
+    height: 260px;
+    margin: 10px;
+    align-self: center;
+}
+
+.actions-box{
+    border: none;
+    width: 220px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.actions-box button{
+    margin: 2px;
+}
+
+.product-card{
+    display: flex;
+    flex-direction: column;
+    border: 2px solid black;
+    width: 220px;
+    height: 250px;
+    margin: 10px;
+    text-align: center;
+    padding: 1px;
+    background-color: aquamarine;
+}
+
+
+.Product-info-page{
+    min-height: 91vh;    
+    justify-items: center;
+    align-items: center;
+    text-align: center;
+}
+
+.product-info-card{
+    display: flex;
+    justify-content:center;
+    margin: 20px;
+    padding: 20px;
+}
+
+.product-info-card .product-img{
+    border: 1px solid grey;
+    height: 400px;
+    width: 415px;
+}
+
+.product-details{
+    /* border: 2px solid black; */
+    /* display: flex; */
+    /* flex-direction: column; */
+    justify-content: center;
+    text-align: left;
+    margin: 20px;
+}
+
+.my-profile-page, .person-details{
+    text-align: center;
+    min-height: 91vh;
+    justify-items: center;
+}
+
+.create-swap-request-page{
+    display: flex;
+    /* flex-direction: column; */
+    border: 2px solid yellow;
+    height: 91vh;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}
+
+.create-swap-request-card{
+    text-align: center;
+    border: 2px solid red;
+    border-radius: 20px;
+    background-color: beige;
+    width: 80ch;
+    height: 80vh;
+}
+
+label{
+    text-align: left;
+}
+
+input{
+    border: none;
+    padding: 5px;
+    border-radius: 10px;
+    margin: 10px;
+}

@@ -1,0 +1,14 @@
+docker run -d -v /home/shubham/SPE_LAB/Major_Project/mysql:/var/lib/mysql --network swapsie-network -e MYSQL_ROOT_PASSWORD=Password -e MYSQL_DATABASE=swapsieDevops --name mysql-swapsie-service mysql
+
+
+docker run -dit -p 8081:8081 --network swapsie-network -e MYSQL_PASSWORD=Password --name swapsie-backend-container swapsie-backend-image
+
+docker run -dit -p 3000:3000 --network swapsie-network --name swapsie-frontend-container swapsie-frontend-image
+
+docker tag swapsie-frontend-image shubhamp194/swapsie-frontend-image
+
+docker tag swapsie-backend-image shubhamp194/swapsie-backend-image
+
+docker push shubhamp194/swapsie-frontend-image
+
+docker push shubhamp194/swapsie-backend-image
