@@ -15,7 +15,7 @@ services:
       - swapsie-dp:/var/lib/mysql
 
   swapsie-backend-container:
-    image: "shubhamp194/swapsie-backend-image"
+    image: "dharmin23/swapsie-backend"
     container_name: swapsie-backend-container
     restart: always
     networks:
@@ -30,7 +30,7 @@ services:
       - mysql-swapsie-service
 
   swapsie-frontend-container:
-    image: "shubhamp194/swapsie-frontend-image"
+    image: "hasan01/swapsie-frontend-image"
     container_name: swapsie-frontend-container
     restart: always
     networks:
