@@ -1,1 +1,2 @@
-localhost ansible_user = hasan
+[MyComputer]
+client1 ansible_host=172.16.137.135 ansible_connection=ssh ansible_user=ansible_user ansible_sudo_pass=Password
