@@ -30,7 +30,7 @@ services:
       - mysql-swapsie-service
 
   swapsie-frontend-container:
-    image: "dharmin23/swapsie-frontend-image"
+    image: "dharmin23/swapsie-frontend"
     container_name: swapsie-frontend-container
     restart: always
     networks:
