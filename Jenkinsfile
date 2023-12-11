@@ -6,20 +6,20 @@ pipeline {
     stages {
         stage('Git clone') {
             steps {
-            git branch: 'main',credentialsId:'Github-credentials',url: 'https://github.com/Shubhamp194/Swapsie-frontend.git'
+            git branch: 'main',credentialsId:'Github-credentials',url: 'https://github.com/Dharmin-23/SPE_Major_frontend'
             }
         }
         stage('Docker Build Image') {
             steps {
                 script{
-                    dockerimage=docker.build "shubhamp194/swapsie-frontend-image"   
+                    dockerimage=docker.build "dharmin23/swapsie-frontend:latest"   
                 }
             }
         }
         stage('Push Docker Image') {
             steps {
                 script{
-                    docker.withRegistry('','docker-jenkins'){
+                    docker.withRegistry('','DockerHubCred'){
                     dockerimage.push()
                     }
                 }

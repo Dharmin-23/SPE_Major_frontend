@@ -3,6 +3,7 @@ import "./App.css";
 import Navbar from "./components/Navbar";
 import { UserContext } from "./contexts/UserContext";
 import AppRouter from "./router/AppRouter";
+import ButtonAppBar from "./components/temp";
 
 function App() {
   const temp = {
@@ -17,7 +18,8 @@ function App() {
   return (
     <div className="App">
       <UserContext.Provider value={{ user, setUser }}>
-        <Navbar />
+        {/* <Navbar /> */}
+        <ButtonAppBar/>
         <AppRouter />
       </UserContext.Provider>
     </div>
