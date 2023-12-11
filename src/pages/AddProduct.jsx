@@ -1,15 +1,16 @@
-import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import routes from "../router/route";
 import { baseUrl } from "../utils/constants";
-// import { UserContext } from "../contexts/UserContext";
+import axios from "axios";
+import TextField from "@mui/material/TextField";
+import Button from "@mui/material/Button";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+import Container from "@mui/material/Container";
 
 function AddProduct() {
-  // const { user, setUser } = useContext(UserContext);
-
   const user = JSON.parse(localStorage.getItem("user"));
-
   let navigate = useNavigate();
 
   const [product, setProduct] = useState({
@@ -39,13 +40,6 @@ function AddProduct() {
     });
   }
 
-  // function setOwner() {
-  //   setProduct({
-  //     ...product,
-  //     [user]: { user },
-  //   });
-  // }
-
   async function handleSubmit(e) {
     e.preventDefault();
 
@@ -56,7 +50,9 @@ function AddProduct() {
     } else {
       try {
         await axios.post(baseUrl + "/product/add", product);
-        alert("Product added successfully \nRedirecting to My Products Page");
+        alert(
+          "Product added successfully \nRedirecting to My Products Page"
+        );
         navigate(routes.MyProducts);
       } catch {
         alert("Error !!!. Invalid inputs");
@@ -65,43 +61,73 @@ function AddProduct() {
   }
 
   return (
-    <div className="Add-product-page">
-      <div className="form-box">
-        <h2>Add Product</h2>
-        <form className="add-product-form" onSubmit={handleSubmit}>
-          <label>Name</label>
-          <input
-            type="text"
+    <Container component="main" maxWidth="xs">
+      <Box
+        sx={{
+          marginTop: 8,
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+        }}
+      >
+        <Typography component="h1" variant="h5">
+          Add Product
+        </Typography>
+        <Box
+          component="form"
+          onSubmit={handleSubmit}
+          sx={{
+            width: "100%", // Fix IE 11 issue.
+            marginTop: 3,
+          }}
+        >
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            id="name"
+            label="Name"
             name="name"
-            placeholder="Enter name of the product"
+            autoComplete="name"
+            autoFocus
             value={product.name}
             onChange={handleChange}
           />
-
-          <label>Description</label>
-          <input
-            type="textBox"
+          <TextField
+            margin="normal"
+            required
+            fullWidth
             name="description"
-            placeholder="Describe your product"
+            label="Description"
+            type="text"
+            id="description"
+            autoComplete="description"
             value={product.description}
             onChange={handleChange}
           />
-
-          <label>Image Link</label>
-          <input
-            type="text"
+          <TextField
+            margin="normal"
+            required
+            fullWidth
             name="imgLink"
-            placeholder="Link to image of product"
+            label="Image Link"
+            type="text"
+            id="imgLink"
+            autoComplete="imgLink"
             value={product.imgLink}
             onChange={handleChange}
           />
-
-          <button type="submit" className="btn btn-primary">
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            sx={{ mt: 3, mb: 2 }}
+          >
             Add Product
-          </button>
-        </form>
-      </div>
-    </div>
+          </Button>
+        </Box>
+      </Box>
+    </Container>
   );
 }
 

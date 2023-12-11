@@ -1,18 +1,16 @@
 import React, { useEffect, useState } from "react";
 import SwapRequestCard from "../components/SwapRequestCard";
-// import { staticSwapRequest } from "../utils/constants";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import routes from "../router/route";
 import { baseUrl } from "../utils/constants";
+import Typography from "@mui/material/Typography";
+import Button from "@mui/material/Button";
+import Container from "@mui/material/Container";
 
 function IncomingSwapRequestsPage() {
   const user = JSON.parse(localStorage.getItem("user"));
-
   let navigate = useNavigate();
-
-  // const data = staticSwapRequest[0];
-  // const requestList = staticSwapRequest;
 
   const [dataFromApi, setDataFromApi] = useState([]);
 
@@ -46,31 +44,31 @@ function IncomingSwapRequestsPage() {
   }, []);
 
   return (
-    <div className="swap-request-page">
-      <h2>Your SwapRequests</h2>
+    <Container maxWidth="md">
+      <Typography variant="h4" gutterBottom>
+        Your Swap Requests
+      </Typography>
 
       {dataFromApi.length > 0 ? (
-        dataFromApi.map((request) => {
-          return (
-            <SwapRequestCard
-              key={request.id}
-              id={request.id}
-              product1={request.product2}
-              product2={request.product1}
-              status={request.status}
-              type="incoming"
-              acceptReq={acceptHandler}
-              declineReq={declineHandler}
-              deleteReq={deleteHandler}
-            />
-          );
-        })
+        dataFromApi.map((request) => (
+          <SwapRequestCard
+            key={request.id}
+            id={request.id}
+            product1={request.product2}
+            product2={request.product1}
+            status={request.status}
+            type="incoming"
+            acceptReq={acceptHandler}
+            declineReq={declineHandler}
+            deleteReq={deleteHandler}
+          />
+        ))
       ) : (
-        <h4 style={{ margin: "20px" }}>
-          Currently there are no swap request for you
-        </h4>
+        <Typography variant="h6" style={{ margin: "20px" }}>
+          Currently, there are no swap requests for you.
+        </Typography>
       )}
-    </div>
+    </Container>
   );
 }
 

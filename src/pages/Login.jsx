@@ -121,10 +121,11 @@ function Login() {
               fullWidth
               id="email"
               label="Email Address"
-              // onChange= {onChangeHandler}
+              onChange= {onChangeHandler}
               name="email"
               autoComplete="email"
               autoFocus
+              value={credentials.email}
             />
             <TextField
               margin="normal"
@@ -136,6 +137,7 @@ function Login() {
               type="password"
               id="password"
               autoComplete="current-password"
+              value={credentials.password}
             />
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}

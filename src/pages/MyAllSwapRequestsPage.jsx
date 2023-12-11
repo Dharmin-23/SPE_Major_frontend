@@ -1,6 +1,9 @@
 import React, { useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link as RouterLink, useNavigate } from "react-router-dom";
 import routes from "../router/route";
+import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
+import Container from "@mui/material/Container";
 
 function MyAllSwapRequestsPage() {
   let navigate = useNavigate();
@@ -12,20 +15,32 @@ function MyAllSwapRequestsPage() {
       alert("Please login first !!! \nRedirecting to Login Page");
       navigate(routes.LoginPage);
     }
-  });
+  }, [navigate, user]);
 
   return (
-    <div style={{ textAlign: "center" }}>
-      <h2>MyAllSwapRequestsPage</h2>
-      <Link className="btn btn-primary" to={routes.IncomingSwapRequestsPage}>
-        IncomingSwapRequests
-      </Link>
-      <br />
-      <br />
-      <Link className="btn btn-success" to={routes.OutgoingSwapRequestsPage}>
-        OutgoingSwapRequests
-      </Link>
-    </div>
+    <Container component="main" maxWidth="xs" style={{ textAlign: "center" }}>
+      <Typography component="h2" variant="h5" gutterBottom>
+        My All Swap Requests Page
+      </Typography>
+      <Button
+        component={RouterLink}
+        to={routes.IncomingSwapRequestsPage}
+        variant="contained"
+        color="primary"
+        style={{ margin: "8px" }}
+      >
+        Incoming Swap Requests
+      </Button>
+      <Button
+        component={RouterLink}
+        to={routes.OutgoingSwapRequestsPage}
+        variant="contained"
+        color="success"
+        style={{ margin: "8px" }}
+      >
+        Outgoing Swap Requests
+      </Button>
+    </Container>
   );
 }
 

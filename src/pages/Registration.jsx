@@ -109,6 +109,7 @@ export default function SignUp() {
                   id="fname"
                   label="First Name"
                   onChange={handleChange}
+                  value={user.fname}
                   autoFocus
                 />
               </Grid>
@@ -119,6 +120,7 @@ export default function SignUp() {
                   id="lname"
                   label="Last Name"
                   name="lname"
+                  value={user.lname}
                   onChange={handleChange}
 
                   autoComplete="family-name"
@@ -132,6 +134,7 @@ export default function SignUp() {
                   label="Email Address"
                   name="email"
                   onChange={handleChange}
+                  value={user.email}
                   autoComplete="email"
                 />
               </Grid>
@@ -143,6 +146,8 @@ export default function SignUp() {
                   label="Password"
                   type="password"
                   id="password"
+                  value={user.password}
+                  onChange={handleChange}
                   autoComplete="new-password"
                 />
               </Grid>

@@ -256,11 +256,11 @@ function ResponsiveAppBar() {
         <Toolbar disableGutters>
 
         <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
-          <Typography
+        <Typography
             variant="h6"
             noWrap
-            component="a"
-            href="#"
+            component={Link} // Use Link component here
+            to = {route.LandingPage} // Link to the home page
             sx={{
               mr: 2,
               display: { xs: 'none', md: 'flex' },

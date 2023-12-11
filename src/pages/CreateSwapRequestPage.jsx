@@ -1,12 +1,22 @@
 import React, { useContext, useEffect, useState } from "react";
-import CreateSwapRequestCard from "../components/CreateSwapRequestCard";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import routes from "../router/route";
 import { baseUrl } from "../utils/constants";
+import {
+  Button,
+  Container,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Paper,
+  Select,
+  Typography,
+} from "@mui/material";
+import CreateSwapRequestCard from "../components/CreateSwapRequestCard";
 
 function CreateSwapRequestPage() {
-  let navigate = useNavigate();
+  const navigate = useNavigate();
 
   const emptyData = {
     id: -1,
@@ -22,9 +32,7 @@ function CreateSwapRequestPage() {
   const user = JSON.parse(localStorage.getItem("user"));
 
   const [myProducts, setMyProducts] = useState([]);
-
   const [product1, setProduct1] = useState(emptyData);
-
   const [product2, setProduct2] = useState({
     id: "",
     name: "",
@@ -75,24 +83,6 @@ function CreateSwapRequestPage() {
     },
   });
 
-  // function setSwapRequestData() {
-  //   setCreatedSwapRequest({
-  //     status: "Pending",
-  //     product1: {
-  //       id: product1.id,
-  //     },
-  //     user1: {
-  //       id: user.id,
-  //     },
-  //     product2: {
-  //       id: product2.id,
-  //     },
-  //     user2: {
-  //       id: product2.user.id,
-  //     },
-  //   });
-  // }
-
   async function sendSwapRequest() {
     try {
       await axios.post(baseUrl + "/swapRequest/create", createdSwapRequest);
@@ -103,7 +93,7 @@ function CreateSwapRequestPage() {
     }
   }
 
-  function handleSubmit(e) {
+  function handleSubmit() {
     if (product1.id < 0) alert("Please select a product to exchange");
     else {
       setCreatedSwapRequest({
@@ -129,45 +119,52 @@ function CreateSwapRequestPage() {
   }
 
   return (
-    <div className="create-swap-request-page">
-      {/* <h2>Create SwapRequest Page</h2> */}
-      <div className="create-swap-request-card">
+    <Container maxWidth="md">
+      <Typography variant="h2" sx={{ marginBottom: 2 }}>
+        Create SwapRequest Page
+      </Typography>
+
+      <Paper elevation={3} sx={{ padding: 2, marginBottom: 2 }}>
         <CreateSwapRequestCard product1={product1} product2={product2} />
 
         <div style={{ margin: "20px" }}>
-          <h5>Choose one of your products to swap with :</h5>
-          <select
-            // value={emptyData}
-            className="form-select"
-            onChange={(e) => {
-              let index = e.target.value;
-              index >= 0
-                ? setProduct1(myProducts[index])
-                : setProduct1(emptyData);
-            }}
-          >
-            <option value={-1}>{"None selected"}</option>
-            {/* <option>"Non"</option> */}
-            {myProducts.length > 0 ? (
-              myProducts.map((product, index) => {
-                return (
-                  <option key={index} value={index}>
+          <FormControl fullWidth>
+            <InputLabel htmlFor="product-select">Choose one of your products to swap with:</InputLabel>
+            <Select
+              value={myProducts.findIndex((prod) => prod.id === product1.id)}
+              onChange={(e) => {
+                const index = e.target.value;
+                index >= 0 ? setProduct1(myProducts[index]) : setProduct1(emptyData);
+              }}
+              label="Choose one of your products to swap with"
+              inputProps={{
+                name: "product",
+                id: "product-select",
+              }}
+            >
+              <MenuItem value={-1} disabled>
+                {"None selected"}
+              </MenuItem>
+              {myProducts.length > 0 ? (
+                myProducts.map((product, index) => (
+                  <MenuItem key={index} value={index}>
                     {product.name}
-                  </option>
-                );
-              })
-            ) : (
-              <option value={-1}>
-                {"You haven't added any products to your account"}
-              </option>
-            )}
-          </select>
+                  </MenuItem>
+                ))
+              ) : (
+                <MenuItem value={-1} disabled>
+                  {"You haven't added any products to your account"}
+                </MenuItem>
+              )}
+            </Select>
+          </FormControl>
         </div>
-        <button onClick={handleSubmit} className="btn btn-success">
-          Send Request
-        </button>
-      </div>
-    </div>
+      </Paper>
+
+      <Button onClick={handleSubmit} variant="contained" color="success">
+        Send Request
+      </Button>
+    </Container>
   );
 }
 

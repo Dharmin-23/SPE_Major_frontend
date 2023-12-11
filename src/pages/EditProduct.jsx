@@ -4,13 +4,19 @@ import { UserContext } from "../contexts/UserContext";
 import routes from "../router/route";
 import axios from "axios";
 import { baseUrl } from "../utils/constants";
+import {
+  Container,
+  Typography,
+  TextField,
+  Button,
+  CssBaseline,
+} from "@mui/material";
 
 function EditProduct() {
   const user = JSON.parse(localStorage.getItem("user"));
-
   let navigate = useNavigate();
-
   const { id } = useParams();
+
   const [product, setProduct] = useState({
     name: "",
     description: "",
@@ -35,7 +41,6 @@ function EditProduct() {
   async function loadProducts() {
     const response = await axios.get(baseUrl + `/product/${id}`);
     setProduct(response.data);
-    // console.log(response.data);
   }
 
   function handleChange(e) {
@@ -51,50 +56,68 @@ function EditProduct() {
       checkLogin();
       return;
     }
+
     await axios.put(baseUrl + `/product/update/${id}`, product);
     alert("Product modified successfully \nRedirecting to Products Info Page");
     navigate(`/productInfo/${product.id}`);
-    // navigate(routes.ProductInfo);
   }
 
   return (
-    <div className="Add-product-page">
-      <div className="form-box">
-        <h2>Edit Product Details</h2>
-        <form className="add-product-form" onSubmit={handleSubmit}>
-          <label>Name</label>
-          <input
-            type="text"
-            name="name"
-            placeholder="Enter name of the product"
-            value={product.name}
-            onChange={handleChange}
-          />
+    <Container component="main" maxWidth="xs">
+      <CssBaseline />
+      <div className="Add-product-page">
+        <div className="form-box">
+          <Typography variant="h5">Edit Product Details</Typography>
+          <form className="add-product-form" onSubmit={handleSubmit}>
+            <TextField
+              label="Name"
+              type="text"
+              name="name"
+              fullWidth
+              variant="outlined"
+              margin="normal"
+              placeholder="Enter name of the product"
+              value={product.name}
+              onChange={handleChange}
+            />
 
-          <label>Description</label>
-          <input
-            type="textBox"
-            name="description"
-            placeholder="Describe your product"
-            value={product.description}
-            onChange={handleChange}
-          />
+            <TextField
+              label="Description"
+              type="text"
+              name="description"
+              fullWidth
+              variant="outlined"
+              margin="normal"
+              placeholder="Describe your product"
+              value={product.description}
+              onChange={handleChange}
+            />
 
-          <label>Image Link</label>
-          <input
-            type="text"
-            name="imgLink"
-            placeholder="Link to image of product"
-            value={product.imgLink}
-            onChange={handleChange}
-          />
+            <TextField
+              label="Image Link"
+              type="text"
+              name="imgLink"
+              fullWidth
+              variant="outlined"
+              margin="normal"
+              placeholder="Link to image of product"
+              value={product.imgLink}
+              onChange={handleChange}
+            />
 
-          <button type="submit" className="btn btn-success">
-            Save Changes
-          </button>
-        </form>
+            <Button
+              type="submit"
+              variant="contained"
+              color="success"
+              fullWidth
+              style={{ marginTop: "16px" }}
+            >
+              Save Changes
+            </Button>
+          </form>
+        </div>
       </div>
-    </div>
+    </Container>
   );
 }
 
