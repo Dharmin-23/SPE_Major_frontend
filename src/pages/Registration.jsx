@@ -47,6 +47,7 @@ export default function SignUp() {
   });
 
   let navigate = useNavigate();
+  const [formSubmitted, setFormSubmitted] = useState(false);
 
   function handleChange(e) {
     setUser({
