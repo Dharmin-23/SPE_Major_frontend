@@ -59,8 +59,9 @@ export default function SignUp() {
 
   async function handleSubmit(e) {
     e.preventDefault();
+    setFormSubmitted(true);
 
-    const isFormValid = Object.values(user).every((value) => value !== "");
+    const isFormValid = Object.values(user).every((value) => value !== "") || !formSubmitted;
 
     if (!isFormValid) {
       alert("Error !!!. Please fill out all fields");
