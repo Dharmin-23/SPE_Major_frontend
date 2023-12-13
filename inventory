@@ -1,2 +1,6 @@
-[MyComputer]
-127.0.0.1 ansible_connection=local ansible_user=AnsibleUser
+[localhost]
+127.0.0.1 ansible_connection=local ansible_user=karanjit
+[Paji]
+bhavjyot ansible_host=192.168.86.70 ansible_user=bhavjyot
+[Systummm]
+knight-night ansible_host=192.168.86.130 ansible_user=knight-night
